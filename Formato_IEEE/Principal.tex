@@ -1,0 +1,266 @@
+\documentclass[12pt]{IEEEtran}
+\usepackage{amsmath}
+\usepackage{mathptmx}
+\usepackage{braket}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{polyglossia}
+\setdefaultlanguage{spanish}
+\setotherlanguage{english}
+\usepackage{enumerate}
+\usepackage{lettrine}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[colorlinks=true,allcolors=negro]{hyperref}
+\usepackage{steinmetz}
+\usepackage{varioref}
+\usepackage{fancyref}
+\usepackage{cleveref}
+\usepackage[colorinlistoftodos]{todonotes}
+%\usepackage{showkeys}
+\usepackage{textcomp}
+\usepackage[siunitx, american]{circuitikz}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{multirow, array} 
+\usepackage{float} 
+\usepackage{booktabs}
+\usepackage{verbatim}
+\usepackage{tabulary}
+\usepackage{multirow}
+\usepackage{pgfplots}
+\usepackage{nicefrac}
+\usepackage{rotating}
+\usepackage{caption}
+\usepackage{cancel}
+\usepackage{fancybox}
+\usepackage{pstricks}
+\usepackage{mdframed}
+\usepackage{empheq}
+\usepackage{mathtools}
+\usepackage{xparse}
+\usepackage{subfig}%Partición para Imágenes
+\usetikzlibrary{mindmap, trees}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes,arrows}
+\newcommand{\grad}{\hspace{-2mm}$\phantom{a}^{\circ}$}
+
+\newcommand{\fasorv}{\mathbb{V}}
+
+%color##########################
+\definecolor{gris}{rgb}{0.5,0.5,0.5}
+\definecolor{morado}{RGB}{75,0,130}
+\definecolor{VerdeOscuro}{RGB}{0,100,0}
+\definecolor{AzulOscuro}{RGB}{0,0,139}
+\definecolor{vinotinto}{RGB}{139,0,0}
+\definecolor{magenta}{RGB}{199,21,133}
+\definecolor{naranja}{RGB}{255,69,0}
+\definecolor{oro}{RGB}{255,215,0}
+\definecolor{uva}{RGB}{139,0,139}
+\definecolor{ocre}{RGB}{139,69,19}
+\definecolor{negro}{RGB}{0,0,0}
+\definecolor{aguamarina}{RGB}{0,255,255}
+\definecolor{AzulCielo}{RGB}{30,144,255}
+\definecolor{verde}{RGB}{0,128,0}
+\definecolor{miel}{RGB}{218,165,32}
+\definecolor{crema}{RGB}{218,165,32}
+\definecolor{PielBlanca}{RGB}{218,165,32}
+\definecolor{chocolate}{RGB}{218,165,32}
+\definecolor{AGris}{RGB}{119,136,153}
+\definecolor{BGris}{RGB}{47,79,79}
+\definecolor{cerceta}{RGB}{0,128,128}
+\definecolor{blanco}{RGB}{255,255,255}
+\definecolor{MarMedio}{RGB}{70,130,180}
+\definecolor{azul}{RGB}{0,0,200}
+\definecolor{rojo}{RGB}{200,0,0}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Salto de Línea en una celda de una Tabla%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%declaración para el uso de \abs{} como función de valor absoluto%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Declaracion para cajas de colores @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+\NewDocumentCommand{\framecolorbox}{oommm}
+ {% #1 = width (optional)
+  % #2 = inner alignment (optional)
+  % #3 = frame color
+  % #4 = background color
+  % #5 = text
+  \IfValueTF{#1}
+   {%
+    \IfValueTF{#2}
+     {\fcolorbox{#3}{#4}{\makebox[#1][#2]{#5}}}
+     {\fcolorbox{#3}{#4}{\makebox[#1]{#5}}}%
+   }
+   {\fcolorbox{#3}{#4}{#5}}%
+ }
+ %@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+ 
+ %€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€ Declaración para fijar un sólo color al recuadro (caja) matemático \boxed €€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€
+ \newcommand{\boxia}{\boxed}
+ \newcommand{\boxib}{\boxed}
+ \newcommand{\boxic}{\boxed}
+ \newcommand{\boxid}{\boxed}
+ \newcommand{\boxie}{\boxed}
+ \newcommand{\boxif}{\boxed}
+ \newcommand{\boxig}{\boxed}
+ \newcommand{\boxih}{\boxed}
+
+
+% Naranja
+
+
+\makeatletter
+\renewcommand{\boxia}[1]{\textcolor{naranja}{%
+  \fbox{\normalcolor\m@th$\displaystyle#1$}}}
+\makeatother
+
+% Verde
+
+\makeatletter
+\renewcommand{\boxib}[1]{\textcolor{verde}{%
+		\fbox{\normalcolor\m@th$\displaystyle#1$}}}
+\makeatother
+
+% morado
+
+\makeatletter
+\renewcommand{\boxic}[1]{\textcolor{morado}{%
+		\fbox{\normalcolor\m@th$\displaystyle#1$}}}
+\makeatother
+
+% vinotinto
+
+\makeatletter
+\renewcommand{\boxid}[1]{\textcolor{vinotinto}{%
+		\fbox{\normalcolor\m@th$\displaystyle#1$}}}
+\makeatother
+
+% Cerceta
+
+\makeatletter
+\renewcommand{\boxie}[1]{\textcolor{cerceta}{%
+		\fbox{\normalcolor\m@th$\displaystyle#1$}}}
+\makeatother
+
+% Aguamarina
+
+\makeatletter
+\renewcommand{\boxif}[1]{\textcolor{aguamarina}{%
+		\fbox{\normalcolor\m@th$\displaystyle#1$}}}
+\makeatother
+
+% Azul
+
+\makeatletter
+\renewcommand{\boxig}[1]{\textcolor{azul}{%
+		\fbox{\normalcolor\m@th$\displaystyle#1$}}}
+\makeatother
+
+% Azul Cielo
+
+\makeatletter
+\renewcommand{\boxih}[1]{\textcolor{AzulCielo}{%
+		\fbox{\normalcolor\m@th$\displaystyle#1$}}}
+\makeatother
+%€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€
+
+%///////////////////////////////////////////
+%			Algo más para circuitos
+%///////////////////////////////////////////
+
+\usetikzlibrary{arrows.meta}
+
+%///////////////////////////////////////////
+%///////////////////////////////////////////
+%///////////////////////////////////////////
+
+\newcommand{\oangle}{$^{\circ}$}
+\newcommand{\oang}{^{\circ}}
+
+% ---------------------- Función Seno, en español
+\makeatletter
+\appto\inlineextras@spanish{\renewcommand\sin{\qopname \relax m{sen}}}
+\appto\blockextras@spanish{\renewcommand\sin{\qopname \relax m{sen}}}
+\makeatother
+
+%♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ Para el cruce de cables / Circuitikz♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ 
+
+
+\tikzset{
+  declare function={% in case of CVS which switches the arguments of atan2
+    atan3(\a,\b)=ifthenelse(atan2(0,1)==90, atan2(\a,\b), atan2(\b,\a));},
+  kinky cross radius/.initial=+.125cm,
+  @kinky cross/.initial=+, kinky crosses/.is choice,
+  kinky crosses/left/.style={@kinky cross=-},kinky crosses/right/.style={@kinky cross=+},
+  kinky cross/.style args={(#1)--(#2)}{
+    to path={
+      let \p{@kc@}=($(\tikztotarget)-(\tikztostart)$),
+          \n{@kc@}={atan3(\p{@kc@})+180} in
+      -- ($(intersection of \tikztostart--{\tikztotarget} and #1--#2)!%
+             \pgfkeysvalueof{/tikz/kinky cross radius}!(\tikztostart)$)
+      arc [ radius     =\pgfkeysvalueof{/tikz/kinky cross radius},
+            start angle=\n{@kc@},
+            delta angle=\pgfkeysvalueof{/tikz/@kinky cross}180 ]
+      -- (\tikztotarget)}}}
+% ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛ ♛
+
+%librería para matemáticas en Tikz
+  \usetikzlibrary{math}
+
+% ❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞
+
+%                            Empieza
+
+% ❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞❅❀ ۞
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+
+%--------------Título--------------------
+\input{Cabecera/Cabecera.tex}
+\input{Resumen/Resumen.tex}
+\input{Seccion1/Seccion1.tex}
+\input{Seccion2/Seccion2.tex}
+\input{Seccion3/Seccion3.tex}
+\input{Seccion4/Seccion4.tex}
+\input{Seccion5/Seccion5.tex}
+\input{Seccion6/Seccion6.tex}
+\input{Seccion1/Seccion1}
+%BIBLIOGRAFIA
+
+\input{Bibliografia/Bibliografia}
+
+\end{document}
